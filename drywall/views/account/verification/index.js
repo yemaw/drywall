@@ -5,8 +5,8 @@ var sendVerificationEmail = function(req, res, options) {
     from: req.app.get('smtp-from-name') +' <'+ req.app.get('smtp-from-address') +'>',
     to: options.email,
     subject: 'Verify Your '+ req.app.get('project-name') +' Account',
-    textPath: 'account/verification/email-text',
-    htmlPath: 'account/verification/email-html',
+    textPath: 'account/verification/email-text.jade',
+    htmlPath: 'account/verification/email-html.jade',
     locals: {
       verifyURL: 'http://'+ req.headers.host +'/account/verification/' + options.verificationToken + '/',
       projectName: req.app.get('project-name')
@@ -33,7 +33,7 @@ exports.init = function(req, res, next){
         return next(err);
       }
 
-      res.render('account/verification/index', {
+      res.render('account/verification/index.jade', {
         data: {
           user: JSON.stringify(user)
         }

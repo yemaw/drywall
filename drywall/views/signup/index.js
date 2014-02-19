@@ -5,7 +5,7 @@ exports.init = function(req, res){
     res.redirect(req.user.defaultReturnUrl());
   }
   else {
-    res.render('signup/index', {
+    res.render('signup/index.jade', {
       oauthMessage: '',
       oauthTwitter: !!req.app.get('twitter-oauth-key'),
       oauthGitHub: !!req.app.get('github-oauth-key'),
@@ -135,8 +135,8 @@ exports.signup = function(req, res){
       from: req.app.get('smtp-from-name') +' <'+ req.app.get('smtp-from-address') +'>',
       to: req.body.email,
       subject: 'Your '+ req.app.get('project-name') +' Account',
-      textPath: 'signup/email-text',
-      htmlPath: 'signup/email-html',
+      textPath: 'signup/email-text.jade',
+      htmlPath: 'signup/email-html.jade',
       locals: {
         username: req.body.username,
         email: req.body.email,
@@ -192,10 +192,10 @@ exports.signupTwitter = function(req, res, next) {
 
       if (!user) {
         req.session.socialProfile = info.profile;
-        res.render('signup/social', { email: '' });
+        res.render('signup/social.jade', { email: '' });
       }
       else {
-        res.render('signup/index', {
+        res.render('signup/index.jade', {
           oauthMessage: 'We found a user linked to your Twitter account.',
           oauthTwitter: !!req.app.get('twitter-oauth-key'),
           oauthGitHub: !!req.app.get('github-oauth-key'),
@@ -219,10 +219,10 @@ exports.signupGitHub = function(req, res, next) {
 
       if (!user) {
         req.session.socialProfile = info.profile;
-        res.render('signup/social', { email: info.profile.emails && info.profile.emails[0].value || '' });
+        res.render('signup/social.jade', { email: info.profile.emails && info.profile.emails[0].value || '' });
       }
       else {
-        res.render('signup/index', {
+        res.render('signup/index.jade', {
           oauthMessage: 'We found a user linked to your GitHub account.',
           oauthTwitter: !!req.app.get('twitter-oauth-key'),
           oauthGitHub: !!req.app.get('github-oauth-key'),
@@ -245,10 +245,10 @@ exports.signupFacebook = function(req, res, next) {
       }
       if (!user) {
         req.session.socialProfile = info.profile;
-        res.render('signup/social', { email: info.profile.emails && info.profile.emails[0].value || '' });
+        res.render('signup/social.jade', { email: info.profile.emails && info.profile.emails[0].value || '' });
       }
       else {
-        res.render('signup/index', {
+        res.render('signup/index.jade', {
           oauthMessage: 'We found a user linked to your Facebook account.',
           oauthTwitter: !!req.app.get('twitter-oauth-key'),
           oauthGitHub: !!req.app.get('github-oauth-key'),
@@ -375,8 +375,8 @@ exports.signupSocial = function(req, res){
       from: req.app.get('smtp-from-name') +' <'+ req.app.get('smtp-from-address') +'>',
       to: req.body.email,
       subject: 'Your '+ req.app.get('project-name') +' Account',
-      textPath: 'signup/email-text',
-      htmlPath: 'signup/email-html',
+      textPath: 'signup/email-text.jade',
+      htmlPath: 'signup/email-html.jade',
       locals: {
         username: workflow.user.username,
         email: req.body.email,

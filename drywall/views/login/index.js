@@ -14,7 +14,7 @@ exports.init = function(req, res){
     res.redirect(getReturnUrl(req));
   }
   else {
-    res.render('login/index', {
+    res.render('login/index.jade', {
       oauthMessage: '',
       oauthTwitter: !!req.app.get('twitter-oauth-key'),
       oauthGitHub: !!req.app.get('github-oauth-key'),
@@ -126,7 +126,7 @@ exports.loginTwitter = function(req, res, next){
       }
 
       if (!user) {
-        res.render('login/index', {
+        res.render('login/index.jade', {
           oauthMessage: 'No users found linked to your Twitter account. You may need to create an account first.',
           oauthTwitter: !!req.app.get('twitter-oauth-key'),
           oauthGitHub: !!req.app.get('github-oauth-key'),
@@ -158,7 +158,7 @@ exports.loginGitHub = function(req, res, next){
       }
 
       if (!user) {
-        res.render('login/index', {
+        res.render('login/index.jade', {
           oauthMessage: 'No users found linked to your GitHub account. You may need to create an account first.',
           oauthTwitter: !!req.app.get('twitter-oauth-key'),
           oauthGitHub: !!req.app.get('github-oauth-key'),
@@ -190,7 +190,7 @@ exports.loginFacebook = function(req, res, next){
       }
 
       if (!user) {
-        res.render('login/index', {
+        res.render('login/index.jade', {
           oauthMessage: 'No users found linked to your Facebook account. You may need to create an account first.',
           oauthTwitter: !!req.app.get('twitter-oauth-key'),
           oauthGitHub: !!req.app.get('github-oauth-key'),

@@ -1,7 +1,7 @@
 'use strict';
 
 exports.init = function(req, res){
-  res.render('contact/index');
+  res.render('contact/index.jade');
 };
 
 exports.sendMessage = function(req, res){
@@ -33,8 +33,8 @@ exports.sendMessage = function(req, res){
       replyTo: req.body.email,
       to: req.app.get('system-email'),
       subject: req.app.get('project-name') +' contact form',
-      textPath: 'contact/email-text',
-      htmlPath: 'contact/email-html',
+      textPath: 'contact/email-text.jade',
+      htmlPath: 'contact/email-html.jade',
       locals: {
         name: req.body.name,
         email: req.body.email,

@@ -5,7 +5,7 @@ exports.init = function(req, res){
     res.redirect(req.user.defaultReturnUrl());
   }
   else {
-    res.render('login/forgot/index');
+    res.render('login/forgot/index.jade');
   }
 };
 
@@ -63,8 +63,8 @@ exports.send = function(req, res, next){
       from: req.app.get('smtp-from-name') +' <'+ req.app.get('smtp-from-address') +'>',
       to: user.email,
       subject: 'Reset your '+ req.app.get('project-name') +' password',
-      textPath: 'login/forgot/email-text',
-      htmlPath: 'login/forgot/email-html',
+      textPath: 'login/forgot/email-text.jade',
+      htmlPath: 'login/forgot/email-html.jade',
       locals: {
         username: user.username,
         resetLink: req.protocol +'://'+ req.headers.host +'/login/reset/'+ user.email +'/'+ token +'/',
